@@ -16,7 +16,7 @@ Data comes from the SQL course by Luke Barousse: [link to the course](https://ww
 This section provides an overview of the Canadian data jobs market, covering the most popular roles, salary trends, required technical skills, and regional job distribution while also emphasizing the continued importance of data analyst positions. It also explores the key skills employers seek in data professionals and maps out the geographic distribution of job opportunities across Canadian provinces.
 ### 1.1 Top in-demand data jobs in Canada
 The following SQL query retrieves a summary of data job postings in Canada from the job_postings_fact table and focuses on identifying the top 5 most frequently posted data job titles in Canada, along with their highest and lowest average yearly salaries and their highest and lowest hourly wages.
-It groups the data by job_title_short and filters for rows where job_country is 'Canada'. For each job title, it calculates the number of job postings, the maximum and minimum average yearly salaries, and the maximum and minimum average hourly wages. The results are ordered by the number of postings in descending order and limited to the top 5 entries. Key functions used include COUNT() for counting rows, MAX() and MIN() for salary extremes, ROUND() for formatting, GROUP BY for aggregation, ORDER BY for sorting, and LIMIT for restricting output.
+It groups the data by job_title_short and filters for rows where job_country is *Canada*. For each job title, it calculates the number of job postings, the maximum and minimum average yearly salaries, and the maximum and minimum average hourly wages. The results are ordered by the number of postings in descending order and limited to the top 5 entries. Key functions used include COUNT() for counting rows, MAX() and MIN() for salary extremes, ROUND() for formatting, GROUP BY for aggregation, ORDER BY for sorting, and LIMIT for restricting output.
 ```sql
 SELECT 
     job_title_short, 
@@ -31,7 +31,7 @@ GROUP BY job_title_short
 ORDER BY 2 DESC
 LIMIT 5;
 ```
-The Python code visualizes the results of the SQL query as a horizontal bar chart using matplotlib and seaborn: 
+The following Python code visualizes the results of the SQL query as a horizontal bar chart using *matplotlib* and *seaborn*: 
 ```py
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -57,6 +57,7 @@ axes.set_ylabel('')
 axes.set_xlabel('Number of Job Postings', fontsize=9)
 plt.show()
 ```
+![Most In-Demand Data Jobs](viz\top_jobs_bar.png)
 ### Key highlights:
 - Data engineering roles are the most in-demand data jobs in Canada, significantly outpacing other positions like data analysts and data scientists. 
 - Engineering-focused roles not only lead in job volume but also offer some of the highest salary and wage potential, reflecting strong market demand and a wide range of experience levels. 
@@ -86,7 +87,7 @@ plt.grid(axis='x', linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.show()
 ```
-
+![Salary Ranges for Data Jobs](viz\salary_ranges.png)
 ```py
 top_jobs = pd.read_csv('top_data_jobs_ca.csv')
 top_jobs = top_jobs.sort_values(by='job_postings', ascending=True)
@@ -107,12 +108,13 @@ plt.grid(axis='x', linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.show()
 ```
+![Wage Ranges for Most In-Demand Data Jobs](viz\wage_ranges.png)
 ### Key highlights:
 - Data engineering roles generally offer the highest salary and wage ranges among the top data jobs in Canada, reflecting strong compensation for this category. 
 - Data analyst and data scientist positions show moderate salary and wage ranges, indicating steady but comparatively lower pay. 
 - Senior data engineers and software engineers also command solid compensation, with salaries and hourly wages positioned between the highest and moderate ranges.
 ### 1.3 Top 10 technical skills for data jobs in Canada
-The following SQL query retrieves the top 10 most frequently required skills in Canadian job postings by joining three tables: job_postings_fact, skills_job_dim, and skills_dim. It counts how many job postings mention each skill, grouping the results by both the skill name and its type. The query filters for job postings specifically from Canada, orders the skills by their frequency in descending order, and limits the output to the ten most common skills, providing insight into the most sought-after skill sets and their categories in the Canadian job market.
+The following SQL query retrieves the top 10 most frequently required skills in Canadian job postings by joining three tables: *job_postings_fact*, *skills_job_dim*, and *skills_dim*. It counts how many job postings mention each skill, grouping the results by both the skill name and its type. The query filters for job postings specifically from Canada, orders the skills by their frequency in descending order, and limits the output to the n most common skills, providing insight into the most sought-after skill sets and their categories in the Canadian job market.
 ```sql
 SELECT 
     skills_dim.skills,
@@ -155,13 +157,14 @@ plt.legend(handles=legend_elements, title='Skill Type', fontsize=8, title_fontsi
 plt.tight_layout()
 plt.show()
 ```
+![Top Skills for Data Jobs](viz\top_skills_col.png)
 ### Key highlights:
 - SQL and Python emerge as the most in-demand technical skills for data jobs, highlighting the central role of programming and data manipulation in the field. 
 - Cloud technologies like AWS and Azure are also highly sought after, reflecting the growing reliance on cloud platforms for data storage and processing. 
 - Tools such as Spark and Databricks represent the demand for big data and distributed computing expertise.
 - Tableau, Excel, and Power BI show that analyst tools remain essential for data visualization and reporting.
 ### 1.4 Data job demand by province 
-The SQL code below defines a Common Table Expression (CTE) named job_location_prov to standardize Canadian job location data. It handles special cases such as null or generic "Canada..." entries by assigning them as "N/A". Then, in the main query, it counts the number of job postings per province, filters to include only those that contain "Canada" in the province name, groups and orders the results by the count in descending order.
+The SQL code below defines a Common Table Expression (CTE) named job_location_prov to standardize Canadian job location data. It handles special cases such as null or generic "Canada..." entries by assigning them as "N/A". Then, in the main query, it counts the number of job postings per province, filters to include only those that contain *Canada* in the province name, groups and orders the results by the count in descending order.
 ```sql
 WITH job_location_prov AS(
     SELECT 
@@ -270,16 +273,17 @@ fig.update_layout(
     paper_bgcolor='lightgrey')
 fig.show()
 ```
+![Data Jobs by Province](viz\map_ca.png)
 ### Key highlights:
 - Ontario dominates the Canadian job market with a substantially higher number of job postings compared to other provinces.
 - Alberta, British Columbia, and Quebec also show notable activity but at significantly lower levels. 
 - The remaining provinces, including Nova Scotia, Saskatchewan, and Manitoba, contribute moderately.
 - New Brunswick, the Northwest Territories, Newfoundland and Labrador, and Prince Edward Island reflect minimal job availability, indicating a strong regional concentration of opportunities in central and western Canada.
 - Notably, the dataset does not include Nunavut and Yukon, indicating either a lack of available postings or missing data from these northern territories.
-## 2. Job market analysis for data analysts
-This section presents an analysis of the Canadian job market for Data Analysts, focusing on salary ranges and key skill requirements. Additionally, it examines the balance between remote and on-site job opportunities.
+## 2. Job market analysis for DATA ANALYSTS
+This section presents an analysis of the Canadian job market for **data analysts**, focusing on salary ranges and key skill requirements. Additionally, it examines the balance between remote and on-site job opportunities.
 ### 2.1 Highest-paying data analyst positions in Canada
-This SQL query retrieves the top 5 highest-paying data analyst job postings in Canada with available average annual salary data. It selects the job title (renamed as "job_position"), rounds the average yearly salary, and includes the company name by joining the job_postings_fact table with the company_dim table. The results are ordered in descending order based on salary.
+This SQL query retrieves the top 5 highest-paying data analyst job postings in Canada with available average annual salary data. It selects the job title (renamed as *job_position*), rounds the average yearly salary, and includes the company name by joining the job_postings_fact table with the company_dim table. The results are ordered in descending order based on salary.
 ```sql 
  SELECT 
     job_title AS job_position,
@@ -291,7 +295,7 @@ WHERE job_title_short = 'Data Analyst' AND job_country = 'Canada' AND salary_yea
 ORDER BY salary_year_avg DESC
 LIMIT 5;
 ```
-A horizontal bar chart displaying the top 5 data analyst job positions in Canada for 2023 was created using Python libraries pandas, matplotlib, and seaborn based on the data from the SQL-query above. 
+A horizontal bar chart displaying the top 5 data analyst job positions in Canada for 2023 was created using Python libraries *pandas*, *matplotlib*, and *seaborn* based on the data from the SQL query above. 
 ```py
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -312,11 +316,12 @@ for i, (value, title) in enumerate(zip(top_jobs['annual_salary'], top_jobs['job_
         weight='semibold')
 plt.xticks(fontsize=7,c='dimgrey')
 plt.yticks(fontsize=9)
-axes.set_title('Top 5 Data Analyst Positions in Canada (2023)', fontsize=11, weight='semibold')
+axes.set_title('Highest-Paid Data Analyst Roles in Canada (2023)', fontsize=11, weight='semibold')
 axes.set_ylabel('')
 axes.set_xlabel('Salary (CAD)', fontsize=9)
 plt.show()
 ```
+![Highest-Paid Data Analyst Roles](viz\top_da_jobs_bar.png)
 ### Key highlights:
 - Top-paying data analyst roles fall within the $109,000–$120,000 range, indicating a relatively narrow band for data analyst positions.
 - The highest-paid role is a Principal Data Analyst, while the lowest is a Data Analyst specializing in VBA and Tableau.
@@ -364,12 +369,13 @@ plt.legend(handles=legend_elements, title='Skill Type', fontsize=8, title_fontsi
 plt.tight_layout()
 plt.show()
 ```
+![Top Skills for Data Analysts](viz\top_da_skills_col.png)
 ### Key highlights:
 - Among technical skills frequently mentioned in data analyst job postings, SQL is leading by a wide margin (1,247 mentions), followed by Excel and Python. 
 - Programming skills like SQL, Python, and R are in high demand, while analyst tools such as Excel, Tableau, and Power BI also feature prominently. 
 - Cloud-related skills are less common, with Azure appearing in 198 listings. 
 ### 2.3 Remote vs on-site jobs
-The following query analyzes data analyst job postings in Canada, grouping them by job type. It uses a CASE statement to label jobs as "Remote" or "On-site" and counts the number of job postings in each category.
+The following query analyzes data analyst job postings in Canada, grouping them by job type. It uses a CASE statement to label jobs as *Remote* or *On-site* and counts the number of job postings in each category.
 ```sql
 SELECT 
     job_title_short,
@@ -382,7 +388,7 @@ FROM job_postings_fact
 WHERE job_title_short = 'Data Analyst' AND job_country = 'Canada'
 GROUP BY 1, 2;
 ```
-This Python code reads job type data from a CSV-file, converts the job counts to integers, and creates a pie chart visualizing the distribution of data analyst job postings by job type (e.g., Remote vs. On-site) and providing a visual summary of the proportion of each job type.
+This Python code reads job type data from a CSV file, converts the job counts to integers, and creates a pie chart visualizing the distribution of data analyst job postings by job type (e.g., *Remote* vs. *On-site*) and providing a visual summary of the proportion of each job type.
 ```py
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -402,12 +408,13 @@ plt.title("Data Analyst Jobs by Job Type", fontsize=12, weight='semibold')
 plt.axis('equal')
 plt.show()
 ```
+![Job Type](viz\da_job_type_pie.png)
 ### Key highlights:
 Most data analyst job postings (1,875) are for on-site positions, while a smaller portion (507) offer remote work options, which means that roughly 78% of the roles require on-site presence, with about 22% available remotely.
 
 # Conclusion
 The data shows that the Canadian data job market is experiencing strong demand, particularly for technically skilled roles such as data engineers, who lead in both job volume and salary potential. Data analysts and data scientists continue to play vital roles, offering steady compensation and serving as essential contributors to data-driven decision-making across industries. 
 
-Although data analysts consistently rank among the top data roles, they generally have a lower hiring volume and moderate salary ranges compared to data engineers. SQL, Python, Excel, Tableau, Excel, Power BI are the most frequently requested skills, while cloud-related skills appear less commonly in job postings, reflecting the market’s emphasis on programming, data manipulation, and visualization tools. Additionally, the majority of Data Analyst positions require on-site work, with only a small share offering remote opportunities. 
+Although data analysts consistently rank among the top data roles, they generally have a lower hiring volume and moderate salary ranges compared to data engineers. SQL, Python, Excel, Tableau, Excel, Power BI are the most frequently requested skills, while cloud-related skills appear less commonly in job postings, reflecting the market’s emphasis on programming, data manipulation, and visualization tools. Additionally, the majority of data analyst positions require on-site work, with only a small share offering remote opportunities. 
 
 Overall, the findings highlight the growing importance of data expertise in Canada, with regional concentration in provinces like Ontario and Alberta. While data engineering drives the market, data analysts maintain a crucial role supported by strong employer demand and a clear focus on core technical competencies.
