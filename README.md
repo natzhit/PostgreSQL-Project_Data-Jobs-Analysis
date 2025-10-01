@@ -3,11 +3,11 @@ This project focuses on analyzing data analyst jobs in Canada in 2023 and defini
 
 # Tools and Data
 For this project, the following tools were used:
-- SQL: querying the database
-- Python (pandas, numpy, matplotlib, seaborn): data visualization
-- PostgreSQL: database management system for organizing and managing data
-- Visual Studio Code: database management and executing SQL queries
-- Git & GitHub: sharing the SQL code and analysis
+- **SQL**: querying the database
+- **Python** (*pandas*, *numpy*, *matplotlib*, *seaborn*): data visualization
+- **PostgreSQL**: database management system for organizing and managing data
+- **Visual Studio Code**: database management and executing SQL queries
+- **Git & GitHub**: sharing the SQL code and analysis
 
 Data comes from the SQL course by Luke Barousse: [link to the course](https://www.youtube.com/watch?v=7mz73uXD9DA).
 
